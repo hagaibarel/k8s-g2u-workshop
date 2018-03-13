@@ -22,7 +22,7 @@ Even of we scale our application to multiple replicas (using ```kubectl scale```
 
 A `nodeSelector` is a property of pods that attracts them  to certain nodes. Taints on the other hand allow for nodes to repel pods that don't tolerate the taint. 
 
-`nodeSelector`, `taints` and `tolertions` work together whan we would like to reserve a node for dedicated workloads, for example a node with a GPU.
+`nodeSelector`, `taints` and `tolerations` work together when we would like to reserve a node for dedicated workloads, for example a node with a GPU.
 
 We can use the following steps:
 1. Taint the node, which will prevent pods from landing on it
