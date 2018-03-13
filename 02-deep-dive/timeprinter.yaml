@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: time-printer
+  labels:
+    name: time-printer
+    app: printer
+    component: timer
+
+spec:
+  selector:
+    matchLabels:
+      name: time-printer
+      app: printer
+
+  template:
+    metadata:
+      labels:
+        name: time-printer
+        app: printer
+
+    spec:
+      containers:
+
+      - name: time-writer
+        image: alpine:3.7
+        volumeMounts:
+        - mountPath: /time-data
+          name: data
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do echo $(date) >> /time-data/time; sleep 5; done"]
+
+      - name: time-reader
+        image: alpine:3.7
+        volumeMounts:
+        - mountPath: /time-data
+          name: data
+          readOnly: true
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do tail -n 1 /time-data/time; sleep 5; done"]
+
+      volumes:
+      - name: data
+        emptyDir: {}

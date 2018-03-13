@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taint
+spec:
+  selector:
+    matchLabels:
+      name: taint
+  template:
+    metadata:
+      labels:
+        name: taint
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.13.9-alpine
+      nodeSelector:
+        disktype: ssd
+      tolerations:
+      - key: dedicated
+        operator: "Equal"
+        value: "gpu"
+        effect: "NoSchedule"

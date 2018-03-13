@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-selector
+spec:
+  selector:
+    matchLabels:
+      name: node-sel
+  template:
+    metadata:
+      labels:
+        name: node-sel
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.13.9-alpine
+      nodeSelector:
+        disktype: ssd

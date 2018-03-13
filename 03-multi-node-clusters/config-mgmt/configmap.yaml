@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  labels:
+    app: nginx
+    component: frontend
+data:
+  proxy_port: "6542"
+
+  htaccess.txt: |
+    [settings]
+    proxy_allow: "all"
+    proxy_command: "let me in!"

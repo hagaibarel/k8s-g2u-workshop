@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-config
+  labels: 
+    app: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx 
+      component: frontend
+  template:
+    metadata:
+      labels:
+        app: nginx
+        component: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.13.9-alpine
+        ports:
+        - containerPort: 80
+          name: http
+        env: 
+        - name: NGINX_USER
+          value: "bart_simpson"
+        - name: NGINX_PASS
+          valueFrom:
+            secretKeyref:
+              name: nginx-secret
+              key: password
+        - name: PROXY_PORT
+          valueFrom:
+            configMapKeyRef: 
+              name: nginx-config 
+              key: proxy_port
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: nginx-config
+          items: 
+          - key: htaccess.txt
+            path: htaccess
