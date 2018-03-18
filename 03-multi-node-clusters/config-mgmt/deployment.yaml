@@ -26,7 +26,7 @@ spec:
           value: "bart_simpson"
         - name: NGINX_PASS
           valueFrom:
-            secretKeyref:
+            secretKeyRef:
               name: nginx-secret
               key: password
         - name: PROXY_PORT
