@@ -12,3 +12,4 @@ data:
     [settings]
     proxy_allow: "all"
     proxy_command: "let me in!"
+    proxy_user: "Leaonrdo"

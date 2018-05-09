@@ -10,12 +10,13 @@ metadata:
     component: timer
 
 spec:
+  replicas: 3
   selector:
     matchLabels:
       name: time-printer
       app: printer
 
-  template:
+  template: #pods
     metadata:
       labels:
         name: time-printer
@@ -30,7 +31,7 @@ spec:
         - mountPath: /time-data
           name: data
         command: ["/bin/sh"]
-        args: ["-c", "while true; do echo $(date) >> /time-data/time; sleep 5; done"]
+        args: ["-c", "while true; do echo $(date) >> /time-data/time; sleep 10; done"]
 
       - name: time-reader
         image: alpine:3.7
@@ -39,7 +40,7 @@ spec:
           name: data
           readOnly: true
         command: ["/bin/sh"]
-        args: ["-c", "while true; do tail -n 1 /time-data/time; sleep 5; done"]
+        args: ["-c", "while true; do tail -n 1 /time-data/time; sleep 10; done"]
 
       volumes:
       - name: data
