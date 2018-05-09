@@ -22,5 +22,5 @@ spec:
           requests:
             memory: 128Mi
             cpu: 250m
-#      nodeSelector:
-#        disktype: ssd
+      nodeSelector:
+        disktype: ssd

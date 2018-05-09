@@ -8,7 +8,7 @@ metadata:
 data:
   proxy_port: "6542"
 
-  htaccess.txt: |
+  htaccess: |
     [settings]
     proxy_allow: "all"
     proxy_command: "let me in!"

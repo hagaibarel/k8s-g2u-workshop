@@ -5,17 +5,17 @@ To run our first pod, we'll first need a kubernetes cluster. We'll use `minikube
 To start a `minikube` machine, run the following from a terminal - 
 
 ```bash
-$ minikube start --bootstrapper kubeadm --kubernetes-version v1.9.4 --memory 4096
+$ minikube start --memory 4096
 ```
 
-The flag bootstrapper flag tells `minikube` how to start the control plane components, while the other ones are pretty self explanatory. you can find additional information in the official [docs](https://kubernetes.io/docs/getting-started-guides/minikube/)
+You can find additional information in the official [docs](https://kubernetes.io/docs/getting-started-guides/minikube/)
 
 Once `minikube` finishes the bootstrapping process, we can start interacting with the cluster (through the API server) using `kubectl`. Note that `minikube` wrote an entry the `kubeconfig` file and set the context to `minikube` itself.
 
 Let's explore what components are in out cluster - 
 
 ```bash
-4 kubectl get pods
+$ kubectl get pods
 ```
 
 You'll get nothing. Why? because we haven't deployed any resources to our cluster. However, we can list the control plane components which are found in the `kube-system` namespace - 
